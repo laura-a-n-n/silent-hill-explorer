@@ -5,6 +5,7 @@ import {
   DataTexture,
   DoubleSide,
   Float32BufferAttribute,
+  LinearFilter,
   Material,
   Matrix4,
   MeshStandardMaterial,
@@ -261,6 +262,8 @@ export const createMaterial = (
           textureMap = textureMap.map((v, i) => (i % 4 === 3 ? 255 - v : v));
         }
         const dataTexture = new DataTexture(textureMap, width, height);
+        dataTexture.minFilter = LinearFilter;
+        dataTexture.magFilter = LinearFilter;
         dataTexture.needsUpdate = true;
         const materialParams = Object.assign(
           {},
