@@ -170,8 +170,9 @@ const textureFolder = gui.addFolder("Texture");
 textureFolder
   .add(clientState.params, "Render Mode", [
     MaterialView.Flat,
-    MaterialView.Textured,
     MaterialView.UV,
+    MaterialView.Wireframe,
+    MaterialView.Textured,
   ])
   .onFinishChange(() => render());
 textureFolder.addColor(clientState.params, "Ambient Color");

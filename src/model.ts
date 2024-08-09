@@ -20,6 +20,7 @@ import decodeDXT from "decode-dxt";
 export const MaterialView = {
   Flat: "Flat color",
   UV: "UV visualization",
+  Wireframe: "Wireframe view",
   Textured: "Textured model",
 } as const;
 export type MaterialType = (typeof MaterialView)[keyof typeof MaterialView];
@@ -231,6 +232,7 @@ export const createMaterial = (
       material = new MeshStandardMaterial(materialParams);
       break;
     }
+    case MaterialView.Wireframe:
     case MaterialView.Textured: {
       const textureIds = model.modelData.textureMetadata?.mainTextureIds;
       let modelTextures = model.textureData?.textures;
@@ -266,6 +268,7 @@ export const createMaterial = (
             map: dataTexture,
             side: DoubleSide,
             transparent: true,
+            wireframe: materialType === MaterialView.Wireframe,
           } as MeshStandardMaterialParameters,
           parameters
         );
